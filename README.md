@@ -1,15 +1,11 @@
 <div align="center">
 	<p align="center">
-		<img src="./img/ex.png" width="200" />
+		<img src="/ex.png" width="200" />
 	</p>
-	<h1 align="center">Persian tools</h1>
-	<p align="center">PersianTools is a standalone, library-agnostic JavaScript that enables some of the Persian features for use in the JavaScript.</p>
+	<h1 align="center">Iranian Platenumber</h1>
+	<p align="center">A React package for displaying and entering information on license plates of Iranian cars.</p>
 </div>
 <hr />
-
-# Iranian Platenumber
-
-### A React package for displaying and entering information on license plates of Iranian cars
 
 [![npm version](https://img.shields.io/npm/v/iranian-platenumber.svg?style=flat-square)](https://www.npmjs.org/package/iranian-platenumber)
 [![install size](https://img.shields.io/badge/dynamic/json?url=https://packagephobia.com/v2/api.json?p=iranian-platenumber&query=$.install.pretty&label=install%20size&style=flat-square)](https://packagephobia.now.sh/result?p=iranian-platenumber)

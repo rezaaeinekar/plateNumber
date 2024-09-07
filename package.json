@@ -1,6 +1,6 @@
 {
-  "name": "@my-username/iranian-platenumber",
-  "version": "1.0.2",
+  "name": "iranian-platenumber",
+  "version": "1.0.5",
   "type": "module",
   "scripts": {
     "dev": "vite",
