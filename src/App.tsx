@@ -1,4 +1,4 @@
-import { ChangeEvent } from "react";
+import { ChangeEvent, useEffect, useState } from "react";
 import {
   isHaveEnglishLetter,
   isHaveNumber,
@@ -8,16 +8,17 @@ import {
   isHavePersianNumber_Symbols_Motions,
   numberToEnglish,
 } from "./dataValid";
-
-type Size = "sm" | "md" | "lg" | "xl";
+import { BgColor, Color, Size } from "./type";
+import { checkColor, sizeCalc } from "./utils";
 
 export default function PlateNumber({
   twoDigit,
   letter,
   threeDigit,
   cityDigit,
-  readOnly,
+  readOnly = false,
   size = "md",
+  colorize = true,
 }: {
   twoDigit?: string;
   letter?: string;
@@ -25,19 +26,32 @@ export default function PlateNumber({
   cityDigit?: string;
   readOnly?: boolean;
   size?: Size;
+  colorize?: boolean;
 }) {
+  const [bgColor, setBgColor] = useState<BgColor>("white");
+  const [color, setColor] = useState<Color>("black");
+
+  useEffect(() => {
+    bgColor == "red" || bgColor == "green"
+      ? setColor("white")
+      : setColor("black");
+  }, [bgColor]);
   return (
     <>
       <div
         style={{
           display: "flex",
           justifyContent: "space-between",
-          width: SizeCalc(size),
+          width: sizeCalc(size),
           border: "1px solid gray",
           borderRadius: "4px",
+          backgroundColor: bgColor,
         }}
       >
         <PlateNumberInput
+          bgColor={bgColor}
+          color={color}
+          setBgColor={colorize ? (color) => setBgColor(color) : undefined}
           val={cityDigit}
           limit={2}
           isNumber
@@ -46,14 +60,27 @@ export default function PlateNumber({
           size={size}
         />
         <PlateNumberInput
+          bgColor={bgColor}
+          color={color}
+          setBgColor={colorize ? (color) => setBgColor(color) : undefined}
           val={threeDigit}
           limit={3}
           isNumber
           readOnly={readOnly}
           size={size}
         />
-        <PlateNumberInput val={letter} readOnly={readOnly} size={size} />
         <PlateNumberInput
+          bgColor={bgColor}
+          color={color}
+          setBgColor={colorize ? (color) => setBgColor(color) : undefined}
+          val={letter}
+          readOnly={readOnly}
+          size={size}
+        />
+        <PlateNumberInput
+          bgColor={bgColor}
+          color={color}
+          setBgColor={colorize ? (color) => setBgColor(color) : undefined}
           val={twoDigit}
           limit={2}
           isNumber
@@ -66,7 +93,7 @@ export default function PlateNumber({
             display: "flex",
             flexDirection: "column",
             justifyContent: "space-around",
-            fontSize: SizeCalc(size, true),
+            fontSize: sizeCalc(size, true),
             alignItems: "center",
             backgroundColor: "blue",
             color: "white",
@@ -88,6 +115,9 @@ function PlateNumberInput({
   readOnly,
   borderLeft,
   size,
+  bgColor,
+  color,
+  setBgColor,
 }: {
   val: string | undefined;
   limit?: number;
@@ -95,6 +125,9 @@ function PlateNumberInput({
   readOnly?: boolean;
   borderLeft?: boolean;
   size: Size;
+  bgColor: string;
+  color: string;
+  setBgColor?: (color: BgColor) => void;
 }) {
   return (
     <>
@@ -118,13 +151,15 @@ function PlateNumberInput({
             style={{
               border: "none",
               borderBottom: "1px solid gray",
-              fontSize: SizeCalc(size, true),
+              fontSize: sizeCalc(size, true),
               outline: "none",
               textAlign: "center",
               width: "100%",
+              backgroundColor: bgColor,
+              color,
             }}
-            onChange={(event: ChangeEvent) => {
-              let { value }: { value: string } = event.target;
+            onChange={(event: ChangeEvent<HTMLInputElement>) => {
+              let { value } = event.target;
 
               if (isNumber && value.length > limit) {
                 value = value.substring(0, value.length - 1);
@@ -159,6 +194,15 @@ function PlateNumberInput({
                 value = value.substring(0, value.length - 1);
               }
 
+              if (value == "ا") {
+                value = "الف";
+              }
+              if (!isNumber && setBgColor) {
+                const result = checkColor(value);
+                value = result.value;
+                setBgColor(result.bgColor);
+              }
+
               event.target.value = value;
             }}
             disabled={readOnly}
@@ -168,18 +212,3 @@ function PlateNumberInput({
     </>
   );
 }
-
-const SizeCalc = (size: Size, isFont?: boolean) => {
-  switch (size) {
-    case "sm":
-      return isFont ? "10px" : "150px";
-    case "md":
-      return isFont ? "13px" : "200px";
-    case "lg":
-      return isFont ? "17px" : "250px";
-    case "xl":
-      return isFont ? "22px" : "350px";
-    default:
-      break;
-  }
-};

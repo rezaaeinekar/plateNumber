@@ -21,28 +21,28 @@ const motions = "\u064B-\u0651"; // ً  ٌ  ٍ  َ	  ُ	  ِ	  ّ
 const persianNumbers = "\u06F0-\u06F9"; // ۰ ۱ ۲ ۳ ۴ ۵ ۶ ۷ ۸ ۹
 const arabicNumbers = "\u0660-\u0669"; // ۰ ۱ ۲ ۳ ۴ ۵ ۶ ۷ ۸ ۹
 const persianNumbersList = [
-  /۰/g,
-  /۱/g,
-  /۲/g,
-  /۳/g,
-  /۴/g,
-  /۵/g,
-  /۶/g,
-  /۷/g,
-  /۸/g,
-  /۹/g,
+    /۰/g,
+    /۱/g,
+    /۲/g,
+    /۳/g,
+    /۴/g,
+    /۵/g,
+    /۶/g,
+    /۷/g,
+    /۸/g,
+    /۹/g,
 ];
 const arabicNumbersList = [
-  /٠/g,
-  /١/g,
-  /٢/g,
-  /٣/g,
-  /٤/g,
-  /٥/g,
-  /٦/g,
-  /٧/g,
-  /٨/g,
-  /٩/g,
+    /٠/g,
+    /١/g,
+    /٢/g,
+    /٣/g,
+    /٤/g,
+    /٥/g,
+    /٦/g,
+    /٧/g,
+    /٨/g,
+    /٩/g,
 ];
 
 const persian1 = "\u0621-\u0628"; // ء آ أ	ؤ	إ	ئ	ا ب
@@ -60,55 +60,70 @@ const persian12 = "\u06BE\u06D5\u0629"; // ھ
 
 const persianLetter = `${persian1}${persian2}${persian3}${persian4}${persian5}${persian6}${persian7}${persian8}${persian9}${persian10}${persian11}${persian12}`;
 
-export const isHavePersianNumber_Symbols_Motions = (str: string) => {
-  const reg = new RegExp(
-    `[${space}${persianNumbers}${arabicNumbers}${motions}${symbols},!@#$^&*]{1,}`
-  );
-
-  return reg.test(str);
-};
+// const regDate = `(([1-2][0-9]{3})/(0[1-9]|1[0-2])/(0[1-9]|[1-2][0-9]|3[0-1]))`;
+// const regTime = `([0-9]{1,2}):([-]{0,1})([0-9]{1,2})`;
 
 export const isHavePersianLetters_number_Symbols_Motions = (str: string) => {
-  const reg = new RegExp(
-    `[${space}${persianNumbers}${arabicNumbers}${motions}${symbols},!@#$^&*]{1,}`
-  );
+    const reg = new RegExp(
+        `[${space}${persianNumbers}${arabicNumbers}${persianLetter}${motions}${symbols},!@#$^&*]{1,}`
+    );
 
-  return reg.test(str);
+    return reg.test(str);
+};
+
+export const isHavePersianNumber_Symbols_Motions = (str: string) => {
+    const reg = new RegExp(
+        `[${space}${persianNumbers}${arabicNumbers}${motions}${symbols},!@#$^&*]{1,}`
+    );
+
+    return reg.test(str);
 };
 
 export const isHavePersianNumber = (str: string) => {
-  const reg = new RegExp(`[${persianNumbers}${arabicNumbers}]{1,}`);
+    const reg = new RegExp(
+        `[${persianNumbers}${arabicNumbers}]{1,}`
+    );
 
-  return reg.test(str);
+    return reg.test(str);
 };
 
 export const isHavePersianLetters = (str: string) => {
-  const reg = new RegExp(`[${persianLetter}]{1,}`);
+    const reg = new RegExp(
+        `[${persianLetter}]{1,}`
+    );
 
-  return reg.test(str);
+    return reg.test(str);
 };
 
 export const isHaveNumber = (str: string) => {
-  const reg = new RegExp(`[0-9]{1,}`);
+    const reg = new RegExp(`[0-9]{1,}`);
 
-  return reg.test(str);
+    return reg.test(str);
 };
 
 export const isHaveEnglishLetter = (str: string) => {
-  const reg = new RegExp(`[a-zA-Z]{1,}`);
+    const reg = new RegExp(`[a-zA-Z]{1,}`);
 
-  return reg.test(str);
+    return reg.test(str);
 };
 
 export const numberToEnglish = (str: string) => {
-  if (!str) {
-    return "";
-  }
-  for (let i = 0; i < 10; i += 1) {
-    str = str
-      .replace(persianNumbersList[i], `${i}`)
-      .replace(arabicNumbersList[i], `${i}`);
-  }
+    if (!str) {
+        return '';
+    }
+    for (let i = 0; i < 10; i += 1) {
+        str = str
+            .replace(persianNumbersList[i], `${i}`)
+            .replace(arabicNumbersList[i], `${i}`);
+    }
 
-  return str.trim();
+    return str.trim();
+};
+
+export const isPhoneNumber = (str: string) => {
+    const eStr = numberToEnglish(str) || ''
+    const reg = new RegExp(`^([\+98|98|0098|0]{0,})([9]{1})([0-9]{9})$`);
+
+    console.log({ eStr, str }, reg.test(eStr));
+    return reg.test(eStr);
 };
