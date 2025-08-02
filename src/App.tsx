@@ -10,6 +10,7 @@ import {
 } from "./dataValid";
 import { BgColor, Color, Size } from "./type";
 import { checkColor, sizeCalc } from "./utils";
+import "./assets/fonts.css";
 
 export default function PlateNumber({
   twoDigit,
@@ -46,6 +47,8 @@ export default function PlateNumber({
           border: "1px solid gray",
           borderRadius: "4px",
           backgroundColor: bgColor,
+          direction: "rtl",
+          fontFamily: "IranPlate, system-ui"
         }}
       >
         <PlateNumberInput
