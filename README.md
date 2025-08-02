@@ -1,7 +1,4 @@
 <div align="center">
-	<p align="center">
-		<img src="/ex.png" width="200" />
-	</p>
 	<h1 align="center">Iranian Platenumber</h1>
 	<p align="center">A React package for displaying and entering information on license plates of Iranian cars.</p>
 </div>
@@ -11,7 +8,7 @@
 [![install size](https://img.shields.io/badge/dynamic/json?url=https://packagephobia.com/v2/api.json?p=iranian-platenumber&query=$.install.pretty&label=install%20size&style=flat-square)](https://packagephobia.now.sh/result?p=iranian-platenumber)
 [![npm bundle size](https://img.shields.io/bundlephobia/minzip/iranian-platenumber?style=flat-square)](https://bundlephobia.com/package/iranian-platenumber@latest)
 [![npm downloads](https://img.shields.io/npm/dm/iranian-platenumber.svg?style=flat-square)](https://npm-stat.com/charts.html?package=iranian-platenumber)
-[![code helpers](https://www.codetriage.com/mohammadrezahayati/iranian-platenumber/badges/users.svg)](https://www.codetriage.com/iranian-platenumber/iranian-platenumber)
+[![code helpers](https://www.codetriage.com/rezzaaeinekar/iranian-platenumber/badges/users.svg)](https://www.codetriage.com/iranian-platenumber/iranian-platenumber)
 [![Known Vulnerabilities](https://snyk.io/test/npm/iranian-platenumber/badge.svg)](https://snyk.io/test/npm/iranian-platenumber)
 [![jsDeliver](https://data.jsdelivr.com/v1/package/npm/iranian-platenumber/badge)](https://www.jsdelivr.com/package/npm/iranian-platenumber)
 
