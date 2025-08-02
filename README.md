@@ -50,3 +50,6 @@ type size = "sm" | "md" | "lg" | "xl"
 | md  | 13px           | 200px     |
 | lg  | 17px           | 250px     |
 | xl  | 22px           | 350px     |
+=======
+# plateNumber
+>>>>>>> fb19ec95095c3a189f67e483169a9099e23faf03
